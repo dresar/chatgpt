@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "AI Multi-Tab Batch Prompter Pro (ChatGPT & Gemini)",
+  "version": "3.0.0",
+  "description": "Ekstensi AI Prompter Floating Draggable Modal di atas ChatGPT & Google Gemini dengan Smart Error Auto-Recovery, Stop-Button Validator, dan Silent HD Downloader.",
+  "permissions": [
+    "storage",
+    "tabs",
+    "scripting",
+    "downloads"
+  ],
+  "host_permissions": [
+    "https://chatgpt.com/*",
+    "https://gemini.google.com/*"
+  ],
+  "action": {
+    "default_title": "Buka AI Prompter Hub Floating Window"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://chatgpt.com/*",
+        "https://gemini.google.com/*"
+      ],
+      "css": ["content/widget.css"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

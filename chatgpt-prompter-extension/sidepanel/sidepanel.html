@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatGPT Multi-Tab Prompter Pro</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Top Sticky Header -->
+    <header class="app-header">
+      <div class="brand-row">
+        <div class="brand-logo">
+          <span class="sparkle-dot"></span>
+          <div class="brand-title-wrap">
+            <h1 class="brand-title">AI Prompter Hub</h1>
+            <span class="badge-pro">CHATGPT & GEMINI PRO</span>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="btnRefreshAll" class="icon-btn" title="Segarkan Data & Tab">🔄</button>
+        </div>
+      </div>
+
+      <!-- Segmented Navigation Tabs (5 Tabs) -->
+      <nav class="nav-segments">
+        <button class="nav-tab active" data-target="view-control">
+          <span class="nav-icon">🚀</span> Kontrol
+        </button>
+        <button class="nav-tab" data-target="view-queue">
+          <span class="nav-icon">📋</span> Antrean <span id="navQueueBadge" class="nav-count">0</span>
+        </button>
+        <button class="nav-tab" data-target="view-tabs">
+          <span class="nav-icon">🌐</span> Worker <span id="navTabBadge" class="nav-count">0</span>
+        </button>
+        <button class="nav-tab" data-target="view-database">
+          <span class="nav-icon">💾</span> Data <span id="navDbBadge" class="nav-count">0</span>
+        </button>
+        <button class="nav-tab" data-target="view-logs">
+          <span class="nav-icon">📜</span> Log
+        </button>
+      </nav>
+    </header>
+
+    <!-- Main Content Views -->
+    <main class="main-content">
+      
+      <!-- VIEW 1: KONTROL UTAMA -->
+      <section id="view-control" class="view-panel active">
+        <!-- Progress Hero Card -->
+        <div class="glass-card hero-card">
+          <div class="hero-header">
+            <span class="hero-label">PROGRES BATCH GENERATE</span>
+            <span id="heroPercentText" class="hero-percent">0%</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="heroProgressBar" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <div class="metrics-grid">
+            <div class="metric-box">
+              <span class="metric-val" id="metricTotal">0</span>
+              <span class="metric-lbl">Total</span>
+            </div>
+            <div class="metric-box success">
+              <span class="metric-val" id="metricSuccess">0</span>
+              <span class="metric-lbl">Selesai</span>
+            </div>
+            <div class="metric-box running">
+              <span class="metric-val" id="metricRunning">0</span>
+              <span class="metric-lbl">Proses</span>
+            </div>
+            <div class="metric-box pending">
+              <span class="metric-val" id="metricPending">0</span>
+              <span class="metric-lbl">Sisa</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Active Workers Status -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>⚡ Worker Tab Sedang Aktif</span>
+            <button id="btnQuickAddTab" class="link-btn">➕ Tambah Tab</button>
+          </div>
+          <div id="activeWorkersList" class="workers-pill-list">
+            <div class="empty-hint-sm">Belum ada worker berjalan.</div>
+          </div>
+        </div>
+
+        <!-- Settings Card -->
+        <div class="glass-card">
+          <div class="card-title">
+            <span>⚙️ Pengaturan Cerdas & Database</span>
+          </div>
+          
+          <div class="settings-list">
+            <label class="switch-row">
+              <div class="switch-info">
+                <span class="switch-title">Auto-Download Gambar HD</span>
+                <span class="switch-desc">Simpan gambar resolusi asli otomatis</span>
+              </div>
+              <input type="checkbox" id="chkAutoDownload" checked class="ios-switch">
+            </label>
+
+            <label class="switch-row">
+              <div class="switch-info">
+                <span class="switch-title">Smart Auto-Recovery</span>
+                <span class="switch-desc">Auto re-prompt jika ada "Kesalahan di pihak saya"</span>
+              </div>
+              <input type="checkbox" id="chkAutoRecovery" checked class="ios-switch">
+            </label>
+
+            <label class="switch-row">
+              <div class="switch-info">
+                <span class="switch-title">Auto-Pindahkan Selesai ke Database</span>
+                <span class="switch-desc">Hapus slide selesai dari antrean aktif & simpan di database</span>
+              </div>
+              <input type="checkbox" id="chkAutoArchive" checked class="ios-switch">
+            </label>
+
+            <div class="input-field-group">
+              <div class="label-with-badge">
+                <label class="input-label" for="txtSubfolder">Default Folder Penyimpanan Global:</label>
+                <span class="badge-hint">Fallback</span>
+              </div>
+              <div class="input-with-icon-and-btn">
+                <div class="input-with-icon flex-1">
+                  <span class="field-icon">📁</span>
+                  <input type="text" id="txtSubfolder" value="ChatGPT_Outputs" placeholder="Contoh: PPTMORPH/TEMPLATES_001">
+                </div>
+                <button id="btnPickGlobalFolder" class="btn-pick-folder" title="Klik untuk memilih folder di komputer">📂 Pilih Folder</button>
+              </div>
+              <span class="field-subtext">💡 Kamu bisa paste path lengkap (seperti <code>C:\Users\...\folder</code>) atau klik tombol <b>Pilih Folder</b>!</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Action Buttons -->
+        <div class="action-footer">
+          <button id="btnStartBatch" class="btn-hero-primary">
+            <span class="btn-glow-icon">🚀</span>
+            <span class="btn-text-main">GAS GENERATE MULTI-TAB</span>
+          </button>
+          <button id="btnStopBatch" class="btn-hero-danger" disabled>
+            <span>⏹️</span>
+            <span>STOP</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- VIEW 2: ANTREAN PROMPT -->
+      <section id="view-queue" class="view-panel">
+        <!-- Queue Actions Toolbar -->
+        <div class="glass-card toolbar-card">
+          <input type="file" id="fileInput" accept=".json,.txt" multiple style="display:none">
+          <div class="toolbar-grid">
+            <button id="btnUploadFile" class="btn-tool accent">
+              <span>📁</span> Upload Multi-File
+            </button>
+            <button id="btnTogglePaste" class="btn-tool">
+              <span>📝</span> Tempel Prompt
+            </button>
+            <button id="btnClearCompletedQueue" class="btn-tool">
+              <span>🧹</span> Hapus Selesai
+            </button>
+            <button id="btnClearQueue" class="btn-tool danger">
+              <span>🗑️</span> Kosongkan
+            </button>
+          </div>
+        </div>
+
+        <!-- Manual Input / Paste Drawer -->
+        <div id="pasteDrawer" class="glass-card drawer-card hidden">
+          <div class="drawer-header">
+            <span>📝 Input Manual atau Tempel Prompt</span>
+            <button id="btnClosePaste" class="icon-btn-sm">✕</button>
+          </div>
+          <div class="drawer-body">
+            <textarea id="txtPasteInput" placeholder="Tempel teks prompt di sini... (Format JSON array atau beberapa paragraf dipisahkan baris baru)"></textarea>
+            <div class="drawer-footer">
+              <button id="btnConfirmPaste" class="btn-primary-sm">➕ Tambahkan ke Antrean</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Queue Item List -->
+        <div id="queueListContainer" class="queue-cards-list">
+          <div class="empty-state">
+            <span class="empty-icon">📋</span>
+            <p>Antrean prompt masih kosong.</p>
+            <span class="empty-sub">Upload file JSON/TXT atau drag & drop file ke area ini!</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 3: WORKER TAB MANAGER (CHATGPT & GOOGLE GEMINI) -->
+      <section id="view-tabs" class="view-panel">
+        <div class="glass-card">
+          <div class="card-title">
+            <span>🌐 Worker Tab (ChatGPT & Gemini)</span>
+            <div style="display:flex; gap:8px;">
+              <button id="btnMassDownloadActiveTab" class="link-btn" title="Unduh semua gambar di tab yang sedang aktif">📥 Unduh Massal</button>
+              <button id="btnSelectAllTabs" class="link-btn">Pilih Semua</button>
+            </div>
+          </div>
+          <p class="section-desc">Atur status aktif & <b>Folder Penyimpanan Khusus</b> per-tab (Bisa multi-akun & campur ChatGPT + Google Gemini secara paralel!):</p>
+          
+          <div id="tabListContainer" class="tab-items-list">
+            <div class="empty-state">
+              <span class="empty-icon">🔍</span>
+              <p>Mencari tab ChatGPT & Gemini...</p>
+            </div>
+          </div>
+
+          <div class="tab-footer-actions-grid">
+            <button id="btnOpenNewChatGptTab" class="btn-secondary-full">
+              ➕ Buka Tab ChatGPT
+            </button>
+            <button id="btnOpenNewGeminiTab" class="btn-secondary-full btn-gemini">
+              ➕ Buka Tab Gemini
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 4: DATABASE & RIWAYAT HASIL GENERATE -->
+      <section id="view-database" class="view-panel">
+        <div class="glass-card">
+          <div class="card-title">
+            <span>💾 Database Riwayat Hasil Generate</span>
+            <button id="btnDownloadDatabaseJson" class="link-btn" title="Unduh file database.json">📥 Unduh JSON</button>
+          </div>
+          <p class="section-desc">Semua slide yang berhasil di-generate tersimpan rapi dan ditandai di sini.</p>
+
+          <div class="db-actions-row">
+            <input type="text" id="txtSearchDb" class="db-search-input" placeholder="🔍 Cari judul atau file...">
+            <button id="btnClearDatabase" class="btn-tool danger">🗑️ Bersihkan</button>
+          </div>
+
+          <div id="dbListContainer" class="db-cards-list">
+            <div class="empty-state">
+              <span class="empty-icon">💾</span>
+              <p>Belum ada rekaman gambar di database.</p>
+              <span class="empty-sub">Jalankan generator untuk menyimpan riwayat otomatis.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- VIEW 5: LIVE CONSOLE LOGS -->
+      <section id="view-logs" class="view-panel">
+        <div class="glass-card log-container-card">
+          <div class="card-title">
+            <span>📜 Live Stream Terminal</span>
+            <div class="log-actions">
+              <button id="btnClearLogs" class="link-btn">Bersihkan</button>
+            </div>
+          </div>
+          <div id="consoleLog" class="terminal-box">
+            <div class="log-row log-info">[SYSTEM] ChatGPT Multi-Tab Prompter Pro v2.2 siap.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

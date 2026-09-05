@@ -1,0 +1,14 @@
+{
+  "name": "chatgpt-image-automation",
+  "version": "1.0.0",
+  "description": "ChatGPT Image Generation Automation via Chrome DevTools Protocol (CDP)",
+  "main": "generator.js",
+  "scripts": {
+    "chrome": "node core/chrome_launcher.js",
+    "generate": "node generator.js",
+    "test-connection": "node -e \"require('./core/cdp').getActivePages().then(console.log).catch(console.error)\""
+  },
+  "keywords": ["chatgpt", "cdp", "automation", "image-generation", "dalle"],
+  "author": "Antigravity",
+  "license": "ISC"
+}

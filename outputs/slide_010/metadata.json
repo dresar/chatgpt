@@ -1,0 +1,14 @@
+{
+  "slide": 10,
+  "name": "slide_010",
+  "title": "Call To Action Batch 1",
+  "prompt": "Single 4:5 vertical image ONLY (1080x1350 px) for Slide 10 (do NOT render grid poster or multiple slides in one image canvas). Modern Tax Education Editorial CTA style. Solid deep navy background (#0F172A). Top-right corner kept completely clean empty navy space. Bold white giant headline 'LIKE, SAVE & FOLLOW FOR BATCH 2!' with gold accent underline. Center features a realistic matte 3D interactive gold and navy button labeled 'FOLLOW & SAVE POSTINGAN INI', flanked by subtle matte 3D heart, bookmark, and share icons. Bottom footer bar with Brevet AB logo mark. Clean editorial layout, generous negative space, warm inviting studio lighting, 8K photographic matte render. NO cartoon characters, NO neon glow, NO crowded props, NO tax theory text, NO metadata text, NO slide numbers, NO logo badge top-right.",
+  "status": "SUCCESS",
+  "attempts": 1,
+  "elapsedSeconds": 32,
+  "imagePath": "C:\\Users\\NCN0C\\Videos\\CHATGPT\\outputs\\slide_010\\slide_010.png",
+  "resolution": "1122x1402",
+  "fileSizeKB": "1378.4",
+  "screenshotPath": "C:\\Users\\NCN0C\\Videos\\CHATGPT\\outputs\\slide_010\\screenshot.png",
+  "completedAt": "2026-08-15T19:29:25.853Z"
+}

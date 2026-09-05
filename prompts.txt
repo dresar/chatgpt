@@ -1,0 +1,6 @@
+# Daftar Prompt Gambar untuk ChatGPT Automation
+# Tulis 1 prompt per baris. Garis yang diawali # akan diabaikan.
+
+Buatkan gambar pemandangan kota cyberpunk futuristik di malam hari dengan lampu neon ungu dan biru, gaya 3D digital art ultra detailed
+Buatkan gambar seekor robot rubah mekanis yang bercahaya di tengah hutan ajaib, cinematic lighting 8k
+Buatkan gambar kafe kopi vintage di sudut jalan Paris saat hujan sore hari yang nyaman, gaya lukisan cat air estetik

@@ -1,0 +1,14 @@
+{
+  "slide": 2,
+  "name": "slide_002",
+  "title": "Kenapa Salah Paham Pajak Bisa Bikin Rugi",
+  "prompt": "Single 4:5 vertical image ONLY (1080x1350 px) for Slide 2 (do NOT render grid poster or multiple slides in one image canvas). Modern Tax Education Editorial content style. Solid deep navy background (#0F172A). Top-right corner kept completely clean empty navy space (strictly reserved for manual logo placement, do NOT draw any logo badge in top-right corner). Bold white giant headline text 'SALAH PAHAM PAJAK = RUGI!' with small gold accent underline. Below it, a realistic matte 3D warning triangle icon in warm orange sitting beside a stack of tax documents and a red downward arrow graph symbolizing financial loss. Asymmetric grid layout with generous white negative space, small gold pill label reading 'HATI-HATI!'. Clean editorial typography, subtle matte lighting, 8K photographic render. NO cartoon characters, NO neon glow, NO crowded objects, NO metadata text, NO slide numbers, NO logo badge in top-right corner.",
+  "status": "SUCCESS",
+  "attempts": 1,
+  "elapsedSeconds": 40,
+  "imagePath": "C:\\Users\\NCN0C\\Videos\\CHATGPT\\outputs\\slide_002\\slide_002.png",
+  "resolution": "1122x1402",
+  "fileSizeKB": "1457.0",
+  "screenshotPath": "C:\\Users\\NCN0C\\Videos\\CHATGPT\\outputs\\slide_002\\screenshot.png",
+  "completedAt": "2026-08-15T19:22:11.804Z"
+}
